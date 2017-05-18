@@ -16,3 +16,5 @@ rivers2<-readRDS(url("https://raw.githubusercontent.com/robbriers/sqlite_test/ma
 rivers3<-readRDS(gzcon(url("https://raw.githubusercontent.com/robbriers/sqlite_test/master/rivers_c.rds")))
 
 # compressed RDS is massively faster to read back in!
+
+sepa<-readRDS(gzcon(url("https://raw.githubusercontent.com/robbriers/sqlite_test/master/sepa.rds")))
