@@ -51,3 +51,5 @@ system.time(canal<-sepa[sepa$Water.body.ID=="1", ])
 
 test<-read_feather("url")
 canal3<-filter(test, Water.body.ID=="1")
+
+# check relative time for filter by character or factor
