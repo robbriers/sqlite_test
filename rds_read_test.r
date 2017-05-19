@@ -18,3 +18,36 @@ rivers3<-readRDS(gzcon(url("https://raw.githubusercontent.com/robbriers/sqlite_t
 # compressed RDS is massively faster to read back in!
 
 sepa<-readRDS(gzcon(url("https://raw.githubusercontent.com/robbriers/sqlite_test/master/sepa.rds")))
+
+str(sepa)
+
+rivers<-sepa[sepa$Water.body.category=="River", ]
+
+canal<-sepa[sepa$Water.body.ID=="1", ]
+
+# subsetting is still quite slow - try feather format and remote subsetting instead
+
+#library(feather)
+
+#write_feather(sepa, "sepa.feather")
+
+# huge file (174mb - not going to be feasible!)
+
+# try dplyr subsetting instead
+
+library(dplyr)
+
+canal2<-filter(sepa, Water.body.ID=="1")
+
+# compare these
+
+system.time(canal2<-filter(sepa, Water.body.ID=="1"))
+system.time(canal<-sepa[sepa$Water.body.ID=="1", ])
+
+# not much in it!
+
+# Could host feather file elsewhere and load/query it from there
+# need to check remote subsetting
+
+test<-read_feather("url")
+canal3<-filter(test, Water.body.ID=="1")
